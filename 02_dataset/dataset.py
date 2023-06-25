@@ -1,8 +1,15 @@
 import torch
 from torchvision import datasets
-from torchvision.transforms import ToTensor
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
+from torchvision import transforms
+
+# define a transform
+transform = transforms.Compose(
+    transforms.Resize(16),
+    transforms.RandomRotation(),
+    transforms.ToTensor()
+)
 
 # download training & testing dataset
 training_data = datasets.FashionMNIST(
