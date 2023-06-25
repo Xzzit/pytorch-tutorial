@@ -5,25 +5,25 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 
 # define a transform
-transform = transforms.Compose(
-    transforms.Resize(16),
-    transforms.RandomRotation(),
+transform = transforms.Compose([
+    transforms.Resize(24),
+    transforms.RandomRotation(45),
     transforms.ToTensor()
-)
+])
 
 # download training & testing dataset
 training_data = datasets.FashionMNIST(
     root='data',
     train=True,
     download=True,
-    transform=ToTensor()
+    transform=transform
 )
 
 test_data = datasets.FashionMNIST(
     root='data',
     train=False,
     download=True,
-    transform=ToTensor()
+    transform=transform
 )
 
 # create label to idx dictionary
