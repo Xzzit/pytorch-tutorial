@@ -29,7 +29,7 @@ test_data = datasets.MNIST(
 # create label to idx dictionary
 labels = {i: training_data.classes[i] for i in range(len(training_data.classes))}
 
-# display images in FashionMNIST
+# display images in MNIST
 figure = plt.figure(figsize=(8, 8))
 cols, rows = 3, 3
 for i in range(1, cols * rows + 1):

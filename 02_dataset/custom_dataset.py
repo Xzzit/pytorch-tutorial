@@ -20,7 +20,7 @@ my_mnist = ImageFolder(root='./my-mnist', transform=transform)
 # create label to idx dictionary
 labels = {i: my_mnist.classes[i] for i in range(len(my_mnist.classes))}
 
-# display images in FashionMNIST
+# display images in MNIST
 figure = plt.figure(figsize=(8, 8))
 cols, rows = 3, 3
 for i in range(1, cols * rows + 1):
