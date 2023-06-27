@@ -1,5 +1,4 @@
 import torch
-from torchvision import datasets
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 from torchvision import transforms
