@@ -18,6 +18,7 @@ training_data = datasets.MNIST(
     download=True,
     transform=transform
 )
+print(training_data[0][0])
 
 test_data = datasets.MNIST(
     root='data',
