@@ -7,19 +7,19 @@ from torchvision import transforms
 # define a transform
 transform = transforms.Compose([
     transforms.Resize(24),
-    transforms.RandomRotation(45),
+    transforms.RandomRotation(10),
     transforms.ToTensor()
 ])
 
 # download training & testing dataset
-training_data = datasets.FashionMNIST(
+training_data = datasets.MNIST(
     root='data',
     train=True,
     download=True,
     transform=transform
 )
 
-test_data = datasets.FashionMNIST(
+test_data = datasets.MNIST(
     root='data',
     train=False,
     download=True,
