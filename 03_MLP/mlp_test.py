@@ -1,6 +1,8 @@
 import torch
 from torchvision import datasets
+from torchvision import transforms
 from torchvision.transforms import ToTensor
+from torchvision.datasets import ImageFolder
 import torch.nn as nn
 
 # load test data
@@ -11,6 +13,14 @@ test_data = datasets.MNIST(
     transform=ToTensor()
 )
 test_data_loader = torch.utils.data.DataLoader(test_data, batch_size=64, shuffle=True)
+
+transform = transforms.Compose([
+    transforms.Grayscale(),
+    transforms.RandomRotation(10),
+    transforms.ToTensor()
+])
+my_mnist = ImageFolder(root='../02_dataset/my-mnist', transform=transform)
+my_mnist_loader = torch.utils.data.DataLoader(my_mnist, batch_size=64, shuffle=True)
 
 # define a MLP model
 class MLP(nn.Module):
@@ -35,7 +45,7 @@ mlp = MLP()
 mlp.load_state_dict(torch.load('mlp.pth'))
 mlp.eval().to(device)
 
-# test the pretrained model
+# test the pretrained model on MNIST test data
 size = len(test_data_loader.dataset)
 correct = 0
 
@@ -47,4 +57,18 @@ with torch.no_grad():
         correct += (pred.argmax(1) == label).type(torch.float).sum().item()
 
 correct /= size
-print(f'Accuracy: {(100*correct):>0.1f}%')
+print(f'Accuracy on MNIST: {(100*correct):>0.1f}%')
+
+# test the pretrained model on my MNIST test data
+size = len(my_mnist_loader.dataset)
+correct = 0
+
+with torch.no_grad():
+    for img, label in my_mnist_loader:
+        img, label = img.to(device), label.to(device)
+        pred = mlp(img)
+
+        correct += (pred.argmax(1) == label).type(torch.float).sum().item()
+
+correct /= size
+print(f'Accuracy on my MNIST: {(100*correct):>0.1f}%')
