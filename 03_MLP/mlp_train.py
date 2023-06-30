@@ -11,16 +11,7 @@ training_data = datasets.MNIST(
     transform=ToTensor()
 )
 
-test_data = datasets.MNIST(
-    root='data',
-    train=False,
-    download=True,
-    transform=ToTensor()
-)
-
-# create dataloader
 train_data_loader = torch.utils.data.DataLoader(training_data, batch_size=64, shuffle=True)
-test_data_loader = torch.utils.data.DataLoader(test_data, batch_size=64, shuffle=False)
 
 # define a MLP model
 class MLP(nn.Module):
@@ -67,19 +58,6 @@ for epoch in range(num_epochs):
             loss, current = loss.item(), idx*len(img)
             print(f'loss: {loss:>7f} [{current:>5d}/{size:>5d}]')
 
-# define test function
-size = len(test_data_loader.dataset)
-mlp.eval()
-test_loss, correct = 0, 0
-
-with torch.no_grad():
-    for X, y in test_data_loader:
-        X, y = X.to(device), y.to(device)
-        pred = mlp(X)
-
-        test_loss += loss_fn(pred, y).item()
-        correct += (pred.argmax(1) == y).type(torch.float).sum().item()
-
-test_loss /= size
-correct /= size
-print(f'Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n')
+# save the model
+torch.save(mlp.state_dict(), 'mlp.pth')
+print('Saved PyTorch Model State to mlp.pth')
