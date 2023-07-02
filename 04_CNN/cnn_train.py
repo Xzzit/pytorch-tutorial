@@ -52,7 +52,7 @@ optimizer = torch.optim.Adam(cnn.parameters(), lr=1e-3)
 loss_fn = nn.CrossEntropyLoss()
 
 # train the model
-num_epochs = 5
+num_epochs = 20
 
 for epoch in range(num_epochs):
     print(f'Epoch {epoch+1}\n-------------------------------')
