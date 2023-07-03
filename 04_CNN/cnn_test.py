@@ -57,7 +57,7 @@ class CNN(nn.Module):
 # load the pretrained model
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 cnn = CNN()
-cnn.load_state_dict(torch.load('cnn.pth'))
+cnn.load_state_dict(torch.load('cnn.pth', map_location=device))
 cnn.eval().to(device)
 
 # test the pretrained model on MNIST test data

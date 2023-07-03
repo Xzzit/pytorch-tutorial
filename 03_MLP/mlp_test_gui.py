@@ -25,7 +25,7 @@ class MLP(nn.Module):
 
 # load the pretrained model
 mlp = MLP()
-mlp.load_state_dict(torch.load('mlp.pth'))
+mlp.load_state_dict(torch.load('mlp.pth', map_location='cpu'))
 mlp.eval()
 
 

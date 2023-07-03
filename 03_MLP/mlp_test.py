@@ -42,7 +42,7 @@ class MLP(nn.Module):
 # load the pretrained model
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 mlp = MLP()
-mlp.load_state_dict(torch.load('mlp.pth'))
+mlp.load_state_dict(torch.load('mlp.pth', map_location=device))
 mlp.eval().to(device)
 
 # test the pretrained model on MNIST test data

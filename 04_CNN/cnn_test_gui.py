@@ -40,7 +40,7 @@ class CNN(nn.Module):
 
 # load the pretrained model
 cnn = CNN()
-cnn.load_state_dict(torch.load('cnn.pth'))
+cnn.load_state_dict(torch.load('cnn.pth', map_location='cpu'))
 cnn.eval()
 
 
