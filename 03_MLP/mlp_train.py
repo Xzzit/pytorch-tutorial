@@ -5,7 +5,7 @@ import torch.nn as nn
 
 # load MNIST dataset
 training_data = datasets.MNIST(
-    root='data',
+    root='../02_dataset/data',
     train=True,
     download=True,
     transform=ToTensor()
