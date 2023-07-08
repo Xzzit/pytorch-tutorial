@@ -4,6 +4,13 @@ from torchvision import transforms
 
 from PIL import Image
 import json
+import argparse
+
+
+# define parser
+parser = argparse.ArgumentParser()
+parser.add_argument('--img_path', type=str, default='car.jpg', help='test image path')
+args = parser.parse_args()
 
 # load pretrained vgg16 model
 vgg16 = models.vgg16(weights='IMAGENET1K_V1')
@@ -21,7 +28,7 @@ transform = transforms.Compose([
 ])
 
 # load image
-img = Image.open('car.jpg')
+img = Image.open(args.img_path)
 img = transform(img)
 img = img.unsqueeze(0)
 
