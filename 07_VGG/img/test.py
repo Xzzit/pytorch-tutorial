@@ -15,6 +15,7 @@ args = parser.parse_args()
 # load pretrained vgg16 model
 vgg16 = models.vgg16(weights='IMAGENET1K_V1')
 vgg16.eval()
+print(vgg16)
 
 # define transform
 transform = transforms.Compose([
