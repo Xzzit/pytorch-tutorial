@@ -1,1 +1,1 @@
-my male is man;
+my male is a man;
