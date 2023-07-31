@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from dataloader import train_loader, test_loader, classes
+from dataloader import train_loader, test_loader
 from model import vgg16
 
 # define the hyperparameters
