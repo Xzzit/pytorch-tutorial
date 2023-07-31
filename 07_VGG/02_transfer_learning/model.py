@@ -12,6 +12,17 @@ for param in vgg16.parameters():
 # replace the last fully-connected layer
 vgg16.classifier[6] = nn.Linear(4096, 10)
 
+# replace the whole classifier
+# vgg16.classifier = nn.Sequential(
+#     nn.Linear(25088, 4096),
+#     nn.ReLU(),
+#     nn.Dropout(0.5),
+#     nn.Linear(4096, 4096),
+#     nn.ReLU(),
+#     nn.Dropout(0.5),
+#     nn.Linear(4096, 10)
+# )
+
 # test the model
 if __name__ == '__main__':
 
