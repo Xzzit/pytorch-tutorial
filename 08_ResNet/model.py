@@ -20,20 +20,19 @@ class ResidualBlock(nn.Module):
         self.conv1 = nn.Sequential(
                         nn.Conv2d(in_channels, out_channel // 4, kernel_size=1, stride=1),
                         nn.BatchNorm2d(out_channel // 4),
-                        nn.ReLU()
+                        nn.ReLU(inplace=True)
                         )
         
         self.conv2 = nn.Sequential(
                         nn.Conv2d(out_channel // 4, out_channel // 4, kernel_size=3, 
                                   stride=2 if downsample else 1, padding=1),
                         nn.BatchNorm2d(out_channel // 4),
-                        nn.ReLU()
+                        nn.ReLU(inplace=True)
                         )
         
         self.conv3 = nn.Sequential(
                         nn.Conv2d(out_channel // 4, out_channel, kernel_size=1, stride=1),
-                        nn.BatchNorm2d(out_channel),
-                        nn.ReLU()
+                        nn.BatchNorm2d(out_channel)
                         )
         
         self.shortcut = nn.Sequential(
@@ -43,14 +42,14 @@ class ResidualBlock(nn.Module):
         
         
     def forward(self, x):
-        residual = self.shortcut(x)
-
         out = self.conv1(x)
         out = self.conv2(out)
         out = self.conv3(out)
 
+        residual = self.shortcut(x.clone())
+
         out = out + residual
-        out = nn.ReLU()(out)
+        out = nn.ReLU(inplace=True)(out)
         return out
     
 
@@ -62,7 +61,7 @@ class ResNet(nn.Module):
         self.conv1 = nn.Sequential(
                         nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3),
                         nn.BatchNorm2d(64),
-                        nn.ReLU())
+                        nn.ReLU(inplace=True))
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
 
         # the residual blocks
