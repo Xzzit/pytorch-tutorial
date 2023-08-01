@@ -60,4 +60,4 @@ for epoch in range(num_epochs):
         print('Accuracy of the network on the {} validation images: {} %'.format(10000, 100 * correct / total))
 
 # save the model checkpoint
-torch.save(model.state_dict(), 'alexnet.pth')
+torch.save(model.state_dict(), 'resnet.pth')
