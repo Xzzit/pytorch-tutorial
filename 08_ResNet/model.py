@@ -49,7 +49,7 @@ class ResidualBlock(nn.Module):
         out = self.conv2(out)
         out = self.conv3(out)
 
-        out += residual
+        out = out + residual
         out = nn.ReLU()(out)
         return out
     
@@ -94,7 +94,7 @@ class ResNet(nn.Module):
         x = self.conv5(x)
 
         x = self.avgpool(x)
-        x = x.view(x.size(0), -1)
+        x = x.reshape(x.size(0), -1)
         x = self.fc(x)
 
         return x
