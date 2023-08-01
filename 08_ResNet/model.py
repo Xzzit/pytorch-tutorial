@@ -18,7 +18,7 @@ class ResidualBlock(nn.Module):
         super(ResidualBlock, self).__init__()
 
         self.conv1 = nn.Sequential(
-                        nn.Conv2d(in_channels, out_channel // 4, kernel_size=3, stride=1, padding=1),
+                        nn.Conv2d(in_channels, out_channel // 4, kernel_size=1, stride=1),
                         nn.BatchNorm2d(out_channel // 4),
                         nn.ReLU()
                         )
@@ -31,7 +31,7 @@ class ResidualBlock(nn.Module):
                         )
         
         self.conv3 = nn.Sequential(
-                        nn.Conv2d(out_channel // 4, out_channel, kernel_size=3, stride=1, padding=1),
+                        nn.Conv2d(out_channel // 4, out_channel, kernel_size=1, stride=1),
                         nn.BatchNorm2d(out_channel),
                         nn.ReLU()
                         )
